@@ -1,0 +1,23 @@
+{
+  "name": "twillo-whatsapp-sanbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarshaKy/twillo-whatsapp-sanbox.git"
+  },
+  "author": "Harsha KY",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HarshaKy/twillo-whatsapp-sanbox/issues"
+  },
+  "homepage": "https://github.com/HarshaKy/twillo-whatsapp-sanbox#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "twilio": "^3.44.0"
+  }
+}

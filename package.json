@@ -18,6 +18,7 @@
   "homepage": "https://github.com/HarshaKy/twillo-whatsapp-sanbox#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "request": "^2.88.2",
     "twilio": "^3.44.0"
   }
 }

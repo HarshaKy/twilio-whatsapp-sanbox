@@ -1,11 +1,11 @@
 const express = require('express')
 const twilio = require('twilio')
 const { MessagingResponse } = require('twilio').twiml;
+const { authToken } = require('./keys.js')
 
 const app = express()
 
 const accountSid = 'AC35160db59eb5991f3c3c835b965d13a2';
-const authToken = 'a40dd2631130e56b0a32ce4449e6c9c0';
 const client = require('twilio')(accountSid, authToken);
 
 

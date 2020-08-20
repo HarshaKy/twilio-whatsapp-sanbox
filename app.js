@@ -1,39 +1,23 @@
 const express = require('express')
 const twilio = require('twilio')
-const { MessagingResponse } = require('twilio').twiml;
-const { authToken } = require('./keys.js')
+const { MessagingResponse } = require('twilio').twiml
+const { accountSid, authToken } = require('./keys.js')
+const bodyParser = require('body-parser')
+const { handleWhatsappResponse } = require('./handleResponse')
+const fs = require('fs')
 
 const app = express()
+app.use(bodyParser.urlencoded({ extended: false }))
 
-const accountSid = 'AC35160db59eb5991f3c3c835b965d13a2';
-const client = require('twilio')(accountSid, authToken);
-
-
-
-app.get('/', (req, res) => {
-		client.messages
-			.create({
-				from: 'whatsapp:+14155238886',
-				body: 'Twilio HQ',
-				persistentAction: ['geo:37.787890,-122.391664|375 Beale St'],
-				statusCallback: 'http://postb.in/1234abcd',
-				to: 'whatsapp:+918971677453'
-			 })
-			.then(message => console.log(message.sid));
-		res.send('Hello World!')
-})
+const client = require('twilio')(accountSid, authToken)
 
 app.post('/message', (req, res) => {
-	const twiml = new MessagingResponse();
-
-	client.messages.list({limit: 1})
-               .then(messages => messages.forEach(m => console.log(m)));
-
-	twiml.message('The Robots are coming! Head for the hills!');
-
-	res.writeHead(200, {'Content-Type': 'text/xml'});
-	res.end(twiml.toString());
-});
+	fs.readFile('context.json', (err, data) => {
+		let contextJson = JSON.parse(data)
+		let context = contextJson.context
+		handleWhatsappResponse(req.body.Body, context, req.body.From)
+	})
+})
 
 
 app.listen(3000, () => {
